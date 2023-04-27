@@ -26,9 +26,9 @@ Object {
               <li>
                 <a
                   class="nav-link"
-                  href="/courses"
+                  href="/books"
                 >
-                  Courses
+                  Books Management
                 </a>
               </li>
             </ul>
@@ -102,9 +102,9 @@ Object {
             <li>
               <a
                 class="nav-link"
-                href="/courses"
+                href="/books"
               >
-                Courses
+                Books Management
               </a>
             </li>
           </ul>

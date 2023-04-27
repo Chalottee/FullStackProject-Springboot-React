@@ -15,9 +15,9 @@ test('valid path to render login page', () => {
   expect(screen.getByText(/Password/i)).toBeInTheDocument()
 });
 
-  test('valid path to render course page', () => {
+  test('valid path to render book page', () => {
     render(
-      <MemoryRouter initialEntries={['/courses/1']}>
+      <MemoryRouter initialEntries={['/books/1']}>
           <InstructorApp/>
       </MemoryRouter>
     );

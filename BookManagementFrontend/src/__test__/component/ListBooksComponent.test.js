@@ -23,16 +23,16 @@ jest.mock('react-router-dom', () => ({
 
 test("renders correctly", async() => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1" }, { "id": 10002, "title": "title2", "description": "description2", "author":"author2" }];
+    const books = [{ "id": 10001,"username": "bytecaptain",  "title": "title1", "description": "description1", "author":"author1" }, { "id": 10002,"username": "bytecaptain",  "title": "title2", "description": "description2", "author":"author2" }];
     axios.get.mockResolvedValue(books);
 
     const tree = renderer.create(<ListBooksComponent />).toJSON();
     expect(tree).toMatchSnapshot();
 });
 
-test('Render ListBookComponent widgets with user logged in ', async() => {
+test('Render ListBookComponent widgets with user logged in', async() => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "title": "title2", "description": "description2", "author":"author2" }];
+    const books = [{ "id": 10001,"username": "bytecaptain",  "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002,"username": "bytecaptain",  "title": "title2", "description": "description2", "author":"author2" }];
     let response = { data: books };
     axios.get.mockResolvedValue(response);
 	//test if user logged in
@@ -46,11 +46,9 @@ test('Render ListBookComponent widgets with user logged in ', async() => {
     expect(screen.getByText(/Update/i)).toBeInTheDocument()
     expect(screen.getByText(/Delete/i)).toBeInTheDocument()
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const title = container.querySelector('h3');
     expect(title.innerHTML).toEqual('All Books');
 
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const listBookDiv = container.querySelector('div.container');
     const listBookDivContent = listBookDiv.innerHTML
     expect(listBookDivContent).toContain('Id');
@@ -59,7 +57,6 @@ test('Render ListBookComponent widgets with user logged in ', async() => {
     expect(listBookDivContent).toContain('Delete');
 
     //Verify widget
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const addBookButton = container.querySelector('button');
     expect(addBookButton.outerHTML).toEqual('<button class="btn btn-success">Add</button>');
 
@@ -67,7 +64,7 @@ test('Render ListBookComponent widgets with user logged in ', async() => {
 
 test('add book', async() => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "title": "title2", "description": "description2", "author":"author2"  }];
+    const books = [{ "id": 10001,"username": "bytecaptain",  "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "username": "bytecaptain", "title": "title2", "description": "description2", "author":"author2"  }];
     let response = { data: books };
     axios.get.mockResolvedValue(response);
 
@@ -79,7 +76,7 @@ test('add book', async() => {
 
 test('update book', async() => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "title": "title2", "description": "description2", "author":"author2" }];
+    const books = [{ "id": 10001,"username": "bytecaptain",  "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "username": "bytecaptain", "title": "title2", "description": "description2", "author":"author2" }];
     let response = { data: books };
     axios.get.mockResolvedValue(response);
     render(<ListBooksComponent />);
@@ -92,7 +89,7 @@ test('update book', async() => {
 
 test('delete book', async() => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "title": "title2", "description": "description2", "author":"author2"  }];
+    const books = [{ "id": 10001,"username": "bytecaptain", "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "username": "bytecaptain","title": "title2", "description": "description2", "author":"author2"  }];
     let response = { data: books };
     axios.get.mockResolvedValue(response);
     render(<ListBooksComponent />);
@@ -107,9 +104,9 @@ test('delete book', async() => {
 
 });
 
-test('Render ListBookComponent widgets with user not logged in ', async() => {
+test('Render ListBookComponent widgets with user not logged in', async() => {
 
-    const books = [{"id": 10001, "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "title": "title2", "description": "description2", "author":"author2"  }];
+    const books = [{"id": 10001, "username": "bytecaptain", "title": "title1", "description": "description1", "author":"author1"}, { "id": 10002, "username": "bytecaptain", "title": "title2", "description": "description2", "author":"author2"  }];
     let response = { data: books };
     axios.get.mockResolvedValue(response);
 	//test if user logged in

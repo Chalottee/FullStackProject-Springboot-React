@@ -13,7 +13,7 @@ jest.mock('axios');
 
 test("renders correctly", async () => {
 
-    const books = [{ "id": 10001, "title": "title1", "description": "description1", "author":"author1" }, { "id": 10002, "title": "title2", "description": "description2", "author":"author2"  }];
+    const books = [{ "id": 10001,"username": "bytecaptain", "title": "title1", "description": "description1", "author":"author1" }, { "id": 10002,"username": "bytecaptain", "title": "title2", "description": "description2", "author":"author2"  }];
     axios.get.mockResolvedValue(books);
 
     const addParams = {params: {id: -1}};
@@ -49,13 +49,12 @@ test('add book', async () => {
         expect(descriptionError).toBeNull();
     }); 
     
-    let book = { "id": 10001,  "title": "title1", "description": "description1", "author":"author1" };
+    let book = { "id": 10001, "username": "bytecaptain", "title": "title1", "description": "description1", "author":"author1" };
     axios.post.mockResolvedValue(book);
 
     const button = screen.getByText("Save");
 
     await waitFor(() => {
-        // eslint-disable-next-line testing-library/no-wait-for-side-effects
         fireEvent.click(button);
     });  
     
@@ -64,7 +63,7 @@ test('add book', async () => {
 test('update book', async () => {
 
     //TODO refactor to be reused
-    const updatedbook = {data: { "id": 10001,  "title": "title1", "description": "description1", "author":"author1"}};
+    const updatedbook = {data: { "id": 10001,"username": "bytecaptain", "title": "title1", "description": "description1", "author":"author1"}};
     axios.get.mockResolvedValue(updatedbook);
 
     const params = {params: {id: 10001}};
@@ -73,15 +72,14 @@ test('update book', async () => {
     const descriptionField = screen.getByTestId('bookDescription');
     await waitFor(() => descriptionField);
 
-    fireEvent.change(descriptionField, { target: { value: 'Learn JPA Description updated' }});
+    fireEvent.change(descriptionField, { target: { value: 'description1 updated' }});
     
-    let book = { "id": 10001,  "title": "title1", "description": "description1", "author":"author1" };
+    let book = { "id": 10001,"username": "bytecaptain",   "title": "title1", "description": "description1 updated", "author":"author1" };
     axios.put.mockResolvedValue(book);
 
     const button = screen.getByText("Save");
 
     await waitFor(() => {
-        // eslint-disable-next-line testing-library/no-wait-for-side-effects
         fireEvent.click(button);
     });    
     

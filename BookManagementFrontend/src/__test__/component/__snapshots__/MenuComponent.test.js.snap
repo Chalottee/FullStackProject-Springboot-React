@@ -19,10 +19,10 @@ exports[`renders correctly 1`] = `
       <li>
         <a
           className="nav-link"
-          href="/courses"
+          href="/books"
           onClick={[Function]}
         >
-          Courses
+          Books Management
         </a>
       </li>
     </ul>

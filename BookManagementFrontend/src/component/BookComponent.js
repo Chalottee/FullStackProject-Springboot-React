@@ -42,11 +42,7 @@ class BookComponent extends Component {
             errors.description = 'Enter a Description'
         } else if (values.description.length < 5) {
             errors.description = 'Enter at least 5 Characters in Description'
-        } else if(!values.author){
-            errors.description = 'Enter a author'
-        } else if(!values.title){
-            errors.description = 'Enter a title'
-        }
+        } 
 
         return errors
     }

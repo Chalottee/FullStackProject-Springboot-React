@@ -6,11 +6,11 @@ import MyProvider from '../.././component/MyProvider';
 
 import AuthenticationService from '../../service/AuthenticationService';
 
-jest.mock('axios');
-
 import LoginComponent from '../.././component/LoginComponent';
 
 import renderer from 'react-test-renderer'
+
+jest.mock('axios');
 
 const basicToken = "Basic Ynl0ZWNhcHRhaW46Ynl0ZWNhcHRhaW4=";
 
@@ -37,9 +37,8 @@ test('Login with right credential', async() => {
     const button = screen.getByTestId("login");
 
     await waitFor(() => {
-        fireEvent.click(button);
-    });    
-
+      fireEvent.click(button);
+  }); 
   });
 
   test('Login with worng credential', async() => {
@@ -62,7 +61,8 @@ test('Login with right credential', async() => {
     AuthenticationService.executeBasicAuthenticationService = jest.fn().mockRejectedValue(new Error('Login failed'));
 
     await waitFor(() => {
-        fireEvent.click(button);
-    });    
+      fireEvent.click(button);
+  });    
+ 
 
   });
