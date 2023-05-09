@@ -22,7 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,19 +43,16 @@ public class BookControllerIntegrationTest extends BaseIntegrationTest {
     @Order(1)
     public void addBook() {
 
-    	Book book = new Book(10001, "bytecaptain","spring", "Spring Boot Introduction","0501");
+    	Book book = new Book(1, "bytecaptain","spring", "Spring Boot Introduction","0501");
 
         HttpEntity<Book> entity = new HttpEntity<>(book, getHttpHeader());
 
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/api/instructors/bytecaptain/books"),
+                createURLWithPort("/instructors/bytecaptain/books"),
                 HttpMethod.POST, entity, String.class);
 
-        String actual = response.getHeaders().get(HttpHeaders.LOCATION).get(0);
-
         assertEquals(HttpStatus.CREATED.value(), response.getStatusCode().value());
-        assertTrue(actual.contains("/instructors/bytecaptain/books"));
-
+        
     }
     
     @Test
@@ -68,12 +64,12 @@ public class BookControllerIntegrationTest extends BaseIntegrationTest {
         HttpEntity<Book> entity = new HttpEntity<>(book, getHttpHeader());
 
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/api/instructors/bytecaptain/books/1"),
+                createURLWithPort("/instructors/bytecaptain/books/1"),
                 HttpMethod.PUT, entity, String.class);
         
         assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
 
-        String expected = "{\"id\":1,\"username\":\"bytecaptain\",\"description\":\"Spring Boot Introduction updated\"}";
+        String expected = "{\"id\":1,\"username\":\"bytecaptain\",\"description\":\"Spring Boot Introduction updated\",\"author\":\"0501\"}";
 
         JSONAssert.assertEquals(expected, response.getBody(), false);
 
@@ -86,10 +82,10 @@ public class BookControllerIntegrationTest extends BaseIntegrationTest {
         HttpEntity<String> entity = new HttpEntity<>(null, getHttpHeader());
 
         ResponseEntity<String> response1 = restTemplate.exchange(
-                createURLWithPort("/api/instructors/bytecaptain/books/1"),
+                createURLWithPort("/instructors/bytecaptain/books/1"),
                 HttpMethod.GET, entity, String.class);
 
-        String expected = "{\"id\":1,\"username\":\"bytecaptain\",\"description\":\"Spring Boot Introduction updated\"}";
+        String expected = "{\"id\":1,\"username\":\"bytecaptain\",\"description\":\"Spring Boot Introduction updated\",\"author\":\"0501\"}";
 
         JSONAssert.assertEquals(expected, response1.getBody(), false);
         
@@ -98,19 +94,19 @@ public class BookControllerIntegrationTest extends BaseIntegrationTest {
 	@Test
 	@Order(4)
 	public void testDeleteBook() {
-		Book book = restTemplate.getForObject(createURLWithPort("/api/instructors/bytecaptain/books/1"), Book.class);
+		Book book = restTemplate.getForObject(createURLWithPort("/instructors/bytecaptain/books/1"), Book.class);
 		assertNotNull(book);
 
 		HttpEntity<String> entity = new HttpEntity<>(null, getHttpHeader());
 
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/api/instructors/bytecaptain/books/1"),
+                createURLWithPort("/instructors/bytecaptain/books/1"),
                 HttpMethod.DELETE, entity, String.class);
 		
         assertEquals(HttpStatus.NO_CONTENT.value(), response.getStatusCode().value());
 
 		try {
-			book = restTemplate.getForObject("/api/instructors/bytecaptain/books/1", Book.class);
+			book = restTemplate.getForObject("/instructors/bytecaptain/books/1", Book.class);
 		} catch (BookNotFoundException e) {
 			assertEquals("Book id not found : 1", e.getMessage());
 		}

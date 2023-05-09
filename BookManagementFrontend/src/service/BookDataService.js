@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const INSTRUCTOR = 'bytecaptain'
-const BOOK_API_URL = 'http://localhost:8080'
+// const BOOK_API_URL = 'http://54.155.62.224:8080'
 //const PASSWORD = 'bytecaptain'
-const INSTRUCTOR_API_URL = BOOK_API_URL+'/instructors/'+INSTRUCTOR
+const INSTRUCTOR_API_URL = '/instructors/'+INSTRUCTOR
 
 class BookDataService {
 

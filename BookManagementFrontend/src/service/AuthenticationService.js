@@ -1,12 +1,13 @@
 import axios from 'axios'
-const BOOK_API_URL = 'http://localhost:8080'
+// const BOOK_API_URL = 'http://54.155.62.224:8080'
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
 class AuthenticationService {
 
     executeBasicAuthenticationService(username, password) {
-        return axios.get(`${BOOK_API_URL}/basicauth`,
+        // return axios.get(`${BOOK_API_URL}/basicauth`,
+        return axios.get(`/basicauth`,
             { headers: { authorization: this.createBasicAuthToken(username, password)} })
     }
 
